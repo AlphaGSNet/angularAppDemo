@@ -1,0 +1,44 @@
+<main class="main">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="search panel panel-default">
+        <div class="panel-body">
+          <h4 class="label-h4">Select what you're searching for:</h4>
+          <div class="radio-group">
+            <label class="radio-inline"><input type="radio" ng-model="vm.dataType" value="people"><span>Peoples</span></label>
+            <label class="radio-inline"><input type="radio" ng-model="vm.dataType" value="movie"><span>Movies</span></label>
+          </div>
+          <form name="form" ng-show="vm.dataType" class="search-form" ng-submit="vm.getResults()">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="{{vm.placeholder[vm.dataType]}}" ng-model="vm.searchKey" name="searchKey" required>
+            </div>
+            <button type="submit" class="btn btn-default">Search</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div ng-class="{'results-container': !vm.results || vm.results.length == 0, 'results panel panel-default': vm.results && vm.results.length > 0}">
+        <div ng-if="!vm.searching && vm.results.length == 0" class="results-placeholder"><p>Use the form to search for<br> "People" or "Movies"</p></div>
+        <div ng-if="vm.searching" class="spinner">
+          <img id="mySpinner" src="assets/images/spin.gif"/>
+          <i>Searching</i>
+        </div>
+        <div ng-if="vm.filteredBy == 'people'" ng-repeat="result in vm.results" class="result">
+          <hr ng-if="$index > 0"/>
+          <div class="result-h3">
+            {{ result.name }}
+          </div>
+          <button type="submit" class="btn btn-default" ng-click="vm.gotoDetail(result, 'people')">See Details</button>
+        </div>
+        <div ng-if="vm.filteredBy == 'movie'" ng-repeat="result in vm.results" class="result">
+          <hr ng-if="$index > 0"/>
+          <h3 class="result-h3">
+            {{ result.title }}
+          </h3>
+          <button type="submit" class="btn btn-default" ng-click="vm.gotoDetail(result, 'movie')">See Details</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

@@ -1,0 +1,42 @@
+<main class="main">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="detail panel panel-default">
+        <div class="panel-body" ng-if="vm.result.type == 'people'">
+          <h3><strong>{{vm.result.name}}</strong></h3>
+          <div class="row">
+            <div class="col-md-6">
+              <h4>Birth Year: {{vm.result.birth_year}}</h4>
+              <h4>Gender: {{vm.result.gender}}</h4>
+              <h4>Eye Color: {{vm.result.eye_color}}</h4>
+              <h4>Hair Color: {{vm.result.hair_color}}</h4>
+              <h4>Height: {{vm.result.height}}</h4>
+              <h4>Mass: {{vm.result.mass}}</h4>
+            </div>
+            <div class="col-md-6">
+              <h4>Movies:
+                <a href="javascript:void(0)" style="display:block" ng-repeat="film in vm.result.films">{{film.title + ($index < vm.result.films.length - 1 ? ', ' : '')}}</a>
+              </h4>
+            </div>
+          </div>
+        </div>
+        <div class="panel-body" ng-if="vm.result.type == 'movie'">
+          <h3><strong>{{vm.result.title}}</strong></h3>
+          <div class="row">
+            <div class="col-md-6" style="display:block">
+              <h4>Opening Crawl:
+                <span>{{vm.result.opening_crawl}}</span>
+              </h4>
+            </div>
+            <div class="col-md-6">
+              <h4>Characters:
+                <a href="javascript:void(0)" style="display:block" ng-repeat="character in vm.result.characters">{{character.name + ($index < vm.result.characters.length - 1 ? ', ' : '')}}</a>
+              </h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a ui-sref="search" style="font-size:2rem;text-decoration:none"><span class="glyphicon glyphicon-chevron-left"></span>Back</a>
+    </div>
+  </div>
+</main>
